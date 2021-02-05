@@ -1,0 +1,37 @@
+<h1>Card</h1>
+
+<div id="card">
+  {{#if courses.length}}
+    <table>
+      <thead>
+        <tr>
+          <th>Course name</th>
+          <th>Price</th>
+          <th>Course count</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each courses}}
+          <tr>
+            <td>{{title}}</td>
+            <td>{{price}}</td>
+            <td>{{count}}</td>
+            <td>
+              <button class="btn btn-small remove red" data-id="{{_id}}">Remove</button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <p><strong>Total price: </strong><span class="price">{{totalPrice}}</span></p>
+
+    <form action="/orders" method="POST">
+      <button type="submit" class="btn">Make order</button>
+    </form>
+  {{else}}
+    <p>Card empty</p>
+  {{/if}}
+</div>
