@@ -39,3 +39,14 @@
   align-items: center;
   justify-content: space-between;
 }
+.auth {
+  padding-top: 1rem;
+}
+.errorAlert {
+  padding: .5rem 1rem;
+  margin-bottom: 1rem;
+  color: red;
+  background: rgba(255, 0, 0, .3);
+  border-radius: 10px;
+  text-align: center;
+}

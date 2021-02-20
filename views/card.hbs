@@ -29,6 +29,7 @@
     <p><strong>Total price: </strong><span class="price">{{totalPrice}}</span></p>
 
     <form action="/orders" method="POST">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
       <button type="submit" class="btn">Make order</button>
     </form>
   {{else}}

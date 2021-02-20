@@ -1,0 +1,77 @@
+<div class="auth">
+  <div class="row">
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s6"><a class="active" href="#login">Log in</a></li>
+      <li class="tab col s6"><a href="#signup">Sign up</a></li>
+    </ul>
+  </div>
+  <div id="login" class="col s6 offset-s3">
+    <h1>Log in</h1>
+
+    {{#if loginError}}
+      <p class="errorAlert">{{loginError}}</p>
+    {{/if}}
+
+    <form action="/auth/login" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="email" id="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="enter email"></span>
+        </div>
+        
+        <div class="input-field col s12">
+          <input name="password" id="password" type="password" class="validate" required>
+          <label for="password">Password</label>
+          <span class="helper-text" data-error="enter password"></span>
+        </div>
+
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+
+        <p><a href="/auth/reset">Forgot your password?</a></p>
+        <button class="btn btn-info">Log in</button>
+      </div>
+    </form>
+  </div>
+  <div id="signup" class="col s6 offset-s3">
+    <h1>Sign up</h1>
+
+    {{#if signupError}}
+      <p class="errorAlert">{{signupError}}</p>
+    {{/if}}
+
+    <form action="/auth/signup" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="email" id="signup_email" type="email" class="validate" required>
+          <label for="signup_email">Email</label>
+          <span class="helper-text" data-error="enter email"></span>
+        </div>
+        
+        <div class="input-field col s12">
+          <input name="name" id="name" type="text" class="validate" required>
+          <label for="name">Name</label>
+          <span class="helper-text" data-error="enter password"></span>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="password" id="signup_password" type="password" class="validate" required>
+          <label for="signup_password">Password</label>
+          <span class="helper-text" data-error="enter password"></span>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="confirm_password" id="confirm_password" type="password" class="validate" required>
+          <label for="confirm_password">Confirm Password</label>
+          <span class="helper-text" data-error="enter password"></span>
+        </div>
+
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+
+        <button class="btn btn-info">Sign up</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
