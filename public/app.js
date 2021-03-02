@@ -32,8 +32,14 @@ if($card) {
 
     if(target.classList.contains('remove')) {
       const id = target.dataset.id
-      
-      fetch(`/card/remove/${id}`, {method: 'delete'})
+      const csrf = target.dataset.csrf
+
+      fetch(`/card/remove/${id}`, {
+        method: 'delete',
+        headers: {
+          'X-XSRF-TOKEN': csrf
+        }
+      })
         .then(res => res.json())
         .then(card => {
           if(card.courses.length) {
@@ -43,7 +49,12 @@ if($card) {
                 <td>${price}</td>
                 <td>${count}</td>
                 <td>
-                  <button class="btn btn-small remove red" data-id="${_id}">Remove</button>
+                  <button class="btn btn-small remove red" 
+                    data-id="${_id}"
+                    data-csrf=${csrf}
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>`
             )).join('')

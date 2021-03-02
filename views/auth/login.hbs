@@ -13,7 +13,7 @@
       <p class="errorAlert">{{loginError}}</p>
     {{/if}}
 
-    <form action="/auth/login" method="POST">
+    <form action="/auth/login" method="POST" novalidate>
       <div class="row">
         <div class="input-field col s12">
           <input name="email" id="email" type="email" class="validate" required>
@@ -41,28 +41,31 @@
       <p class="errorAlert">{{signupError}}</p>
     {{/if}}
 
-    <form action="/auth/signup" method="POST">
+    <form action="/auth/signup" method="POST" novalidate>
       <div class="row">
         <div class="input-field col s12">
-          <input name="email" id="signup_email" type="email" class="validate" required>
+          <input name="email" id="signup_email" type="email" class="validate" required 
+            value="{{data.email}}">
           <label for="signup_email">Email</label>
           <span class="helper-text" data-error="enter email"></span>
         </div>
         
         <div class="input-field col s12">
-          <input name="name" id="name" type="text" class="validate" required>
+          <input name="name" id="name" type="text" class="validate" required value="{{data.name}}">
           <label for="name">Name</label>
           <span class="helper-text" data-error="enter password"></span>
         </div>
 
         <div class="input-field col s12">
-          <input name="password" id="signup_password" type="password" class="validate" required>
+          <input name="password" id="signup_password" type="password" class="validate" required
+            value="{{data.password}}">
           <label for="signup_password">Password</label>
           <span class="helper-text" data-error="enter password"></span>
         </div>
 
         <div class="input-field col s12">
-          <input name="confirm_password" id="confirm_password" type="password" class="validate" required>
+          <input name="confirm_password" id="confirm_password" type="password" class="validate" required
+            value="{{data.confirmPass}}">
           <label for="confirm_password">Confirm Password</label>
           <span class="helper-text" data-error="enter password"></span>
         </div>

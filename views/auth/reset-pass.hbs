@@ -2,8 +2,8 @@
   <div class="col s6 offset-s3">
     <h1>Forgot your password?</h1>
 
-    {{#if resetPassError}}
-      <p class="errorAlert">{{resetPassError}}</p>
+    {{#if resetError}}
+      <p class="errorAlert">{{resetError}}</p>
     {{/if}}
 
     <form action="/auth/reset" method="POST">

@@ -1,7 +1,11 @@
 <h1>Edit course {{course.title}}</h1>
 
+{{#if courseEditError}}
+  <p class="errorAlert">{{courseEditError}}</p>
+{{/if}}
+
 <div class="add-course">
-  <form action="/courses/edit" method="POST">
+  <form action="/courses/edit" method="POST" novalidate>
     <div class="row">
       <div class="input-field col s12">
         <input name="title" id="title" type="text" class="validate" required value="{{course.title}}">
@@ -31,6 +35,7 @@
     </div>
   </form>
   <form action="/courses/remove" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <input type="hidden" name="_id" value="{{course._id}}">
     <button type="submit" class="btn red">Remove</button>
   </form>

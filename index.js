@@ -15,6 +15,8 @@ const session = require('express-session')
 const varMiddleware = require('./middleware/vars')
 const MongoStore = require('connect-mongodb-session')(session)
 const userMiddleware = require('./middleware/user')
+const errorHendler = require('./middleware/404')
+const hbsHelpers = require('./utils/hbs-helpers')
 
 const app = express()
 const store = new MongoStore({
@@ -25,6 +27,7 @@ const store = new MongoStore({
 const handlebars = expressHandlebars.create({
   defaultLayout: 'main',
   extname: 'hbs',
+  helpers: hbsHelpers,
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
@@ -55,7 +58,9 @@ app.use('/card', cardRoute)
 app.use('/orders', ordersRoute)
 app.use('/auth', authRoute)
 
-const start = async() => {
+app.use(errorHendler)
+
+const start = async () => {
   try{
     await mongoose.connect(keys.MONGO_DB_URI, { 
       useNewUrlParser: true, 
@@ -63,6 +68,7 @@ const start = async() => {
       useFindAndModify: false
     }, 
     err => {
+      if(err) throw err
       console.log('mongodb connected')
     })
 

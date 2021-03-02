@@ -19,7 +19,12 @@
             <td>{{price}}</td>
             <td>{{count}}</td>
             <td>
-              <button class="btn btn-small remove red" data-id="{{_id}}">Remove</button>
+              <button class="btn btn-small remove red" 
+                data-id="{{_id}}"
+                data-csrf={{@root.csrf}}
+              >
+                Remove
+              </button>
             </td>
           </tr>
         {{/each}}
