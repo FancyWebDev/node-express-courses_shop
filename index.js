@@ -80,7 +80,7 @@ const start = async () => {
       console.log('mongodb connected')
     })
 
-    app.listen(keys.BASE_SITE_URL || 5000, () => {
+    app.listen(process.env.PORT || 5000, () => {
       console.log(`server is running on 5000 port`)
     })
   } catch(e) {
