@@ -8,14 +8,18 @@ const cardRoute = require('./routes/card')
 const addCourseRoute = require('./routes/add-course')
 const coursesRoute = require('./routes/courses')
 const ordersRoute = require('./routes/orders')
+const profileRoute = require('./routes/profile')
 const mongoose = require('mongoose')
+const helmet = require('helmet')
+const compression = require('compression')
 const keys = require('./keys')
 const authRoute = require('./routes/auth')
 const session = require('express-session')
-const varMiddleware = require('./middleware/vars')
 const MongoStore = require('connect-mongodb-session')(session)
 const userMiddleware = require('./middleware/user')
-const errorHendler = require('./middleware/404')
+const errorHandler = require('./middleware/404')
+const varMiddleware = require('./middleware/vars')
+const fileMiddleware = require('./middleware/file')
 const hbsHelpers = require('./utils/hbs-helpers')
 
 const app = express()
@@ -38,8 +42,8 @@ app.engine('hbs', handlebars.engine)
 
 app.set('view engine', 'hbs')
 app.set('views', 'views')
-
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
   secret: 'some secret value',
@@ -47,8 +51,11 @@ app.use(session({
   saveUninitialized: false,
   store
 }))
+app.use(fileMiddleware.single('avatar'))
 app.use(csrf())
 app.use(flash())
+app.use(helmet())
+app.use(compression())
 app.use(varMiddleware)
 app.use(userMiddleware)
 app.use('/', homeRoute)
@@ -57,8 +64,9 @@ app.use('/add%20course', addCourseRoute)
 app.use('/card', cardRoute)
 app.use('/orders', ordersRoute)
 app.use('/auth', authRoute)
+app.use('/profile', profileRoute)
 
-app.use(errorHendler)
+app.use(errorHandler)
 
 const start = async () => {
   try{

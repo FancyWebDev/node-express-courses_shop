@@ -4,6 +4,7 @@
 /node_modules
 /data
 /models/card.js
+/keys/keys.dev.js
 /.pnp
 .pnp.js
 
